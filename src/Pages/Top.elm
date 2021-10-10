@@ -37,8 +37,8 @@ import Game
         , GameStatus(..)
         , Msg(..)
         , Player(..)
-        , Turn(..)
         , StatusMessage(..)
+        , Turn(..)
         )
 import Game.Core
     exposing
@@ -156,6 +156,7 @@ view model =
                 ]
             , viewGamestatus (Game.currentStatus model.game) model.dimensions
             , viewStatusMessage (Game.currentStatusMessage model.game)
+            -- , if model.game == Game.init then viewRestartButton else Element.none
             ]
         ]
     }
@@ -200,14 +201,14 @@ viewGamestatus gamestatus dimensions =
                 script =
                     case player of
                         Human ->
-                            paragraph [] [ text "Click an empty cell to play the piece the computer chose for you. ", viewRestartButton ]
+                            paragraph [] [ text "Click an empty cell to play the piece the computer chose for you. " ]
 
                         Computer ->
-                            paragraph [] [ text "Computer is thinking of where to play selected gamepiece. ", viewRestartButton ]
+                            paragraph [] [ text "Computer is thinking of where to play selected gamepiece. " ]
             in
             containerize
                 [ script
-                , row [ centerX, Font.center ] [ text "Selected gamepiece: ", viewGamepiece gamepiece  ]
+                , row [ centerX, Font.center ] [ text "Selected gamepiece: ", viewGamepiece gamepiece ]
                 ]
 
         InPlay player ChoosingPiece ->
